@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.main.dao.LOltMapper" >
+  <resultMap id="BaseResultMap" type="com.main.model.LOlt" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="bandwith" property="bandwith" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bandwith
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from l_olt
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from l_olt
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.main.model.LOlt" >
+    insert into l_olt (id, bandwith)
+    values (#{id,jdbcType=VARCHAR}, #{bandwith,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.main.model.LOlt" >
+    insert into l_olt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bandwith != null" >
+        bandwith,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="bandwith != null" >
+        #{bandwith,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.main.model.LOlt" >
+    update l_olt
+    <set >
+      <if test="bandwith != null" >
+        bandwith = #{bandwith,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.main.model.LOlt" >
+    update l_olt
+    set bandwith = #{bandwith,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
